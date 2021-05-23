@@ -8,15 +8,27 @@
         </li>
       </ul>
     </nav>
+
     <nav class="second-nav">
-      <h1>Content goes here</h1>
+      <div class="jumbotrom">
+        <img src="../assets/img/jumbotron.jpg" alt="">
+      </div>
+      <div class="boton-volante">Current Series</div>
+      <div class="comics">
+        <ul>
+          <li class="comic" v-for="(comic, index) in comics" :key="index">
+            <img :src="comic.thumb" alt="">
+            <span>{{comic.series}}</span>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </template>
 
 <script>
+import comics from "../assets/data/dc-comics.js";
 export default {
-  
   data(){
     return{
       links:[
@@ -70,16 +82,18 @@ export default {
           url : "/",
           current : false
         },
-      ]
+      ],
+      comics
     }
-    
+  },
+  mounted(){
+    console.log(comics);
   }
 }
 </script>
 
 <style lang="scss">
   .first-nav{
-    
     height: 80px;
     padding: 1% 10%;
     display: flex;
@@ -99,11 +113,50 @@ export default {
     }
   }
   .second-nav{
-    height: 80px;
-    padding: 1% 10%;
-    display: flex;
-    align-items: center;
-    color: white;
-    background-color: black;
+    position: relative;
+   .jumbotrom{
+     width: 100%;
+     height: 300px;
+     overflow: hidden;
+     color: black;
+     img{
+       width: 100%;
+       height:700px;
+     }
+    }
+    .boton-volante{
+      position: absolute;
+      left: 18%;
+      top: 40%;
+      height: 35px;
+      padding: 10px;
+      background-color: #0282F9;
+      color: white;
+      text-transform: uppercase;
+    }
+    .comics{
+      width: 100%;
+      height: 400px;
+      padding: 1% 10% ;
+      background-color: #1C1C1C;
+      overflow: auto;
+      ul{
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 15px;
+        color: white;
+        .comic{
+          width: calc(100% / 7);
+          height: 150px;
+          margin: 15px 15px 70px 10px ;
+          
+          position: relative;
+          img{
+            width: 100%;
+            height: 170px;
+          }
+        }
+      }
+    }
   }
 </style>
